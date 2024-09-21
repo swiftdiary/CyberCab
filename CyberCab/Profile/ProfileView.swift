@@ -4,27 +4,30 @@
 //
 //  Created by Akbar Khusanbaev on 21/09/24.
 //
+
 import SwiftUI
 
 struct ProfileView: View {
     @State private var profileObservable = ProfileViewObservable()
     @Environment(CustomNavigation.self) var customNavigation
+    @AppStorage("isAuthenticated") private var isAuthenticated: Bool = false
+    
+    let authService = AuthenticationService()
     
     var body: some View {
         @Bindable var profileObservable = profileObservable
         @Bindable var customNavigation = customNavigation
         
         ZStack {
-            Color.csBackground
-                .ignoresSafeArea()
+            Color.csBackground.ignoresSafeArea()
             
             if let member = profileObservable.member {
                 VStack(spacing: 20) {
-                    UserNameLabel(member: member)
+                    userNameLabel(member: member)
                         .padding(.leading)
                     
-                    SettingsOptions(member: member)
-                        
+                    settingsOptions(member: member)
+                    
                     Spacer()
                 }
                 .padding(.top, 10)
@@ -32,29 +35,38 @@ struct ProfileView: View {
                 ProgressView()
             }
         }
-//        .environment(profileObservable)
         .environment(customNavigation)
         .task {
-            do {
-                try await profileObservable.getMember()
-            } catch {
-                print(error)
-            }
+            await loadProfileData()
         }
     }
     
-    // Updated SettingsOptions with SF Symbols and accent colors
-    @ViewBuilder private func SettingsOptions(member: Member) -> some View {
+    // MARK: - Load Profile Data
+    private func loadProfileData() async {
+        do {
+            try await profileObservable.getMember()
+        } catch {
+            print("Failed to load profile data: \(error)")
+        }
+    }
+}
+
+// MARK: - Extensions with @ViewBuilder
+extension ProfileView {
+    
+    // MARK: - Settings Options View
+    @ViewBuilder
+    func settingsOptions(member: Member) -> some View {
         VStack {
             List {
-                SettingsOptionRow(title: "History", systemImage: "clock.fill", color: .blue, nav: .history(memvber: member))
-                if let url = URL(string: "mailto:akhusanbaev1@gmail.com") {
-                    Link(destination: url) {
-                        SettingsOptionRow(title: "Contacts", systemImage: "person.2.fill", color: .green, nav: nil)
-                    }
-                }
-                SettingsOptionRow(title: "Privacy Policy", systemImage: "lock.shield.fill", color: .purple, nav: .privacyPolicy)
-                SettingsOptionRow(title: "Terms of Use", systemImage: "doc.text.fill", color: .orange, nav: .termsOfService)
+                settingsOptionRow(title: "History", systemImage: "clock.fill", color: .blue, nav: .history(memvber: member))
+                
+                contactLinkRow()
+                
+                settingsOptionRow(title: "Privacy Policy", systemImage: "lock.shield.fill", color: .purple, nav: .privacyPolicy)
+                settingsOptionRow(title: "Terms of Use", systemImage: "doc.text.fill", color: .orange, nav: .termsOfService)
+                
+                logOutButton()
             }
             .scrollDisabled(true)
             .scrollContentBackground(.hidden)
@@ -62,9 +74,35 @@ struct ProfileView: View {
             .foregroundStyle(Color.primary)
         }
     }
-
-    // A reusable row component for settings options with an SF Symbol
-    @ViewBuilder private func SettingsOptionRow(title: String, systemImage: String, color: Color, nav: CustomNavigationOption?) -> some View {
+    
+    // MARK: - Log Out Button
+    @ViewBuilder
+    func logOutButton() -> some View {
+        Button {
+            do {
+                try authService.logOut()
+                isAuthenticated = false
+            } catch {
+                print("Logout failed: \(error)")
+            }
+        } label: {
+            settingsOptionRow(title: "Log Out", systemImage: "rectangle.portrait.and.arrow.right", color: .red, nav: nil)
+        }
+    }
+    
+    // MARK: - Contact Link Row
+    @ViewBuilder
+    func contactLinkRow() -> some View {
+        if let url = URL(string: "mailto:akhusanbaev1@gmail.com") {
+            Link(destination: url) {
+                settingsOptionRow(title: "Contacts", systemImage: "person.2.fill", color: .green, nav: nil)
+            }
+        }
+    }
+    
+    // MARK: - Settings Option Row
+    @ViewBuilder
+    func settingsOptionRow(title: String, systemImage: String, color: Color, nav: CustomNavigationOption?) -> some View {
         HStack {
             Image(systemName: systemImage)
                 .resizable()
@@ -84,15 +122,17 @@ struct ProfileView: View {
                 .frame(width: 20, height: 20)
         }
         .onTapGesture {
-            if let nav1 = nav {
-                customNavigation.path.append(nav1)
+            if let destination = nav {
+                customNavigation.path.append(destination)
             }
         }
         .padding(.vertical, 10)
         .frame(minHeight: 35)
     }
     
-    @ViewBuilder private func UserNameLabel(member: Member) -> some View {
+    // MARK: - User Name Label
+    @ViewBuilder
+    func userNameLabel(member: Member) -> some View {
         HStack(spacing: 30) {
             Image("profile")
                 .resizable()
@@ -108,4 +148,3 @@ struct ProfileView: View {
         }
     }
 }
-
