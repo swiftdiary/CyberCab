@@ -11,7 +11,9 @@ import SwiftUI
 struct CyberCabApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            OnboardingView()
+                .preferredColorScheme(.light)
         }
     }
 }
