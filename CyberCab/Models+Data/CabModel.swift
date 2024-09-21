@@ -18,7 +18,7 @@ struct Cab: Firestorable {
     let locationId: String
     let name: AppLocalizable
     let image: String
-    let profession: String
+    let profession: AppLocalizable
     let content: [CabContent]
     let maxMembers: Int
     let status: CabStatus

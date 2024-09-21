@@ -18,8 +18,8 @@ struct Article: Firestorable {
 
 struct ArticleContent: Codable, Hashable {
     let type: ArticleContentType
-    let headline: String?
-    let paragraph: String?
+    let headline: AppLocalizable?
+    let paragraph: AppLocalizable?
     let image: String?
     let arItem: String?
     
