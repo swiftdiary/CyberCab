@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CA1B1CF22C9ED8AE001761AF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CA1B1CF12C9ED8AE001761AF /* FirebaseAuth */; };
 		CA1B1CF42C9ED8AE001761AF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CA1B1CF32C9ED8AE001761AF /* FirebaseFirestore */; };
+		CA1B1CF72C9EDC7F001761AF /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CA1B1CF62C9EDC7F001761AF /* FirebaseAnalytics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 			files = (
 				CA1B1CF22C9ED8AE001761AF /* FirebaseAuth in Frameworks */,
 				CA1B1CF42C9ED8AE001761AF /* FirebaseFirestore in Frameworks */,
+				CA1B1CF72C9EDC7F001761AF /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +42,7 @@
 			isa = PBXGroup;
 			children = (
 				CA1B1CE12C9ED7F9001761AF /* CyberCab */,
+				CA1B1CF52C9EDC7F001761AF /* Frameworks */,
 				CA1B1CE02C9ED7F9001761AF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +53,13 @@
 				CA1B1CDF2C9ED7F9001761AF /* CyberCab.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CA1B1CF52C9EDC7F001761AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +84,7 @@
 			packageProductDependencies = (
 				CA1B1CF12C9ED8AE001761AF /* FirebaseAuth */,
 				CA1B1CF32C9ED8AE001761AF /* FirebaseFirestore */,
+				CA1B1CF62C9EDC7F001761AF /* FirebaseAnalytics */,
 			);
 			productName = CyberCab;
 			productReference = CA1B1CDF2C9ED7F9001761AF /* CyberCab.app */;
@@ -368,6 +379,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CA1B1CF02C9ED8AE001761AF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		CA1B1CF62C9EDC7F001761AF /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA1B1CF02C9ED8AE001761AF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
