@@ -19,14 +19,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct CyberCabApp: App {
-    
+    @AppStorage("isAuthenticated") private var isAuthenticated: Bool = false
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
 //            ContentView()
-            OnboardingView()
-                .preferredColorScheme(.light)
+//            OnboardingView()
+//                .preferredColorScheme(.light)
+            if isAuthenticated {
+                HomeView()
+            } else {
+                AuthenticationView()
+            }
         }
     }
 }
