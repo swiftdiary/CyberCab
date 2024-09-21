@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SavedView.swift
 //  CyberCab
 //
 //  Created by Akbar Khusanbaev on 21/09/24.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct SavedView: View {
     var body: some View {
-        CustomTabView()
+        Text("Hello, Saved!")
     }
 }
 
 #Preview {
-    ContentView()
+    SavedView()
 }

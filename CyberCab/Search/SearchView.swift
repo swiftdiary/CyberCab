@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SearchView.swift
 //  CyberCab
 //
 //  Created by Akbar Khusanbaev on 21/09/24.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct SearchView: View {
     var body: some View {
-        CustomTabView()
+        Text("Hello, Search!")
     }
 }
 
 #Preview {
-    ContentView()
+    SearchView()
 }

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ProfileView.swift
 //  CyberCab
 //
 //  Created by Akbar Khusanbaev on 21/09/24.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ProfileView: View {
     var body: some View {
-        CustomTabView()
+        Text("Hello, Profile!")
     }
 }
 
 #Preview {
-    ContentView()
+    ProfileView()
 }

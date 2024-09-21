@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @AppStorage("isFirstLaunch") private var isFirstLaunch: Bool = true
     @State private var scrollOffset: CGFloat = -50  // Initial scroll offset
     @State private var pageNum = 0  // Tracks the current page number
     @State private var gradientPercent: CGFloat = 0.6
@@ -111,7 +112,7 @@ struct OnboardingView: View {
             } else {
                 // Perform any action when you reach the last page
                 // Example: Proceed to the next screen or finish onboarding
-                print("Reached the end of onboarding!")
+                isFirstLaunch = false
             }
         }
     }
