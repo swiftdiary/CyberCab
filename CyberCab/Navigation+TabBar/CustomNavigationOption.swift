@@ -8,12 +8,16 @@
 import SwiftUI
 
 enum CustomNavigationOption: Hashable {
-    case settings
+    case history(memvber: Member)
+    case privacyPolicy
+    case termsOfService
     
     @ViewBuilder
     var destination: some View {
         switch self {
-        case .settings: Text("Settings page....")
+        case .history(let member): HistoryView(member: member)
+        case .privacyPolicy: Text("Privacy Policy")
+        case .termsOfService: Text("Terms of Service")
         }
     }
 }
