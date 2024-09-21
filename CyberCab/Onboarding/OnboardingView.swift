@@ -28,12 +28,14 @@ struct OnboardingView: View {
                 
                 // Title text
                 Text("Try & Find your dream job")
-                    .font(.system(size: 40, weight: .bold))
+                    .font(.system(size: 36, weight: .bold))
+                    .fontDesign(.monospaced)
                     .padding(.horizontal, 20)
                     .padding(.vertical)
                     .background(LinearGradient(stops: [.init(color: .gray.opacity(0.5), location: 0), .init(color: .csBackground, location: gradientPercent)], startPoint: .leading, endPoint: .trailing))
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     .frame(maxHeight: .infinity)
+                    .padding(.horizontal)
                 
                 // Next button
                 NextButton()
