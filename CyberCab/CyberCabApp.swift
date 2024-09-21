@@ -21,6 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct CyberCabApp: App {
     @AppStorage("isFirstLaunch") private var isFirstLaunch: Bool = true
     @AppStorage("isAuthenticated") private var isAuthenticated: Bool = false
+    @AppStorage("hasAnsweredQuestions") private var hasAnsweredQuestions: Bool = false
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
@@ -30,7 +31,11 @@ struct CyberCabApp: App {
                     OnboardingView()
                 } else {
                     if isAuthenticated {
-                        ContentView()
+                        if hasAnsweredQuestions {
+                            ContentView()
+                        } else {
+                            QuestionsView()
+                        }
                     } else {
                         AuthenticationView()
                     }
