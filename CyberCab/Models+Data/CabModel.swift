@@ -16,10 +16,10 @@ struct Cab: Firestorable {
     
     let id: String
     let locationId: String
-    let name: String
+    let name: AppLocalizable
     let image: String
     let profession: String
-    let content: [String]
+    let content: [CabContent]
     let maxMembers: Int
     let status: CabStatus
     
@@ -30,40 +30,17 @@ struct Cab: Firestorable {
     }
 }
 
-
-// MARK: - Session Model
-struct Session: Firestorable {
-    static var collectionReferenceName: String = "sessions"
-    var createdAt: Date
+struct CabContent: Codable, Hashable {
+    let type: CabContentType
+    let image: String?
+    let paragraph: String?
+    let heading: String?
+    let arItem: String?
     
-    let id: String
-    let availableHourId: String
-    let memberId: String
-    let scheduleDate: Date
-    let status: SessionStatus
-    
-    // Enum to represent different session statuses
-    enum SessionStatus: String, Codable {
-        case scheduled
-        case completed
-        case canceled
-    }
-}
-
-// MARK: - AvailableHour Model
-struct AvailableHour: Firestorable {
-    static var collectionReferenceName: String = "availableHours"
-    var createdAt: Date
-    
-    let id: String
-    let cabId: String
-    let duration: TimeInterval
-    let weekday: Weekday
-    let time: Date
-    let price: Int
-    
-    // Enum to represent the days of the week
-    enum Weekday: String, CaseIterable, Codable {
-        case monday, tuesday, wednesday, thursday, friday, saturday, sunday
+    enum CabContentType: String, Codable {
+        case paragraph
+        case image
+        case heading
+        case arItem
     }
 }
