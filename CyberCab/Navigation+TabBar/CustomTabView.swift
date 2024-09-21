@@ -17,12 +17,16 @@ struct CustomTabView: View {
         ZStack(alignment: .bottom) {
             TabView(selection: $customNavigation.tabSelection, content: {
                 ForEach(CustomTabOption.allCases, id: \.hashValue) { option in
-                    option.view
-                        .environment(customNavigation)
-                        .toolbar(.hidden)
+                    NavigationStack(path: $customNavigation.path) {
+                        option.view
+                            .environment(customNavigation)
+                            .toolbar(.hidden)
+                            .navigationDestination(for: CustomNavigationOption.self, destination: { $0.destination.toolbar(.hidden, for: .tabBar).environment(customNavigation) })
+                    }
+                    .tag(option)
                 }
             })
-            if tabIsVisible {
+            if customNavigation.path.isEmpty {
                 HStack {
                     ForEach(CustomTabOption.allCases, id: \.hashValue) { option in
                         HStack {
