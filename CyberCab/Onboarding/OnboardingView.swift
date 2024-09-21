@@ -27,9 +27,9 @@ struct OnboardingView: View {
                     .padding(.top, 70)
                 
                 // Title text
-                Text("Try & Find your dream job")
+                Text("Explore, Learn, and Play: Discover Your Future Career!")
                     .font(.system(size: 36, weight: .bold))
-                    .fontDesign(.monospaced)
+//                    .fontDesign(.monospaced)
                     .padding(.horizontal, 20)
                     .padding(.vertical)
                     .background(LinearGradient(stops: [.init(color: .gray.opacity(0.5), location: 0), .init(color: .csBackground, location: gradientPercent)], startPoint: .leading, endPoint: .trailing))
