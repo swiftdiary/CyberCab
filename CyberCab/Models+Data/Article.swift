@@ -14,6 +14,7 @@ struct Article: Firestorable {
     
     let title: AppLocalizable
     let content: [ArticleContent]
+    let image: String
 }
 
 struct ArticleContent: Codable, Hashable {

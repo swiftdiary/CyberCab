@@ -10,6 +10,8 @@ import SwiftUI
 
 @Observable
 final class QuestionsObservable {
+    var member: Member?
+    
     var allQuestions = [Question]()
     var currentQuestionIndex: Int = 0
     
@@ -23,6 +25,16 @@ final class QuestionsObservable {
     var answerChoicesList: [AnswerChoice] = []
     
     @ObservationIgnored private let questionsManager = FirestoreManager<Question>()
+    @ObservationIgnored private let authenticationService = AuthenticationService()
+    @ObservationIgnored private let memberManager = FirestoreManager<Member>()
+    
+    func getUser() async throws {
+        let authData = try authenticationService.getAuthenticatedUser()
+        let member = try await memberManager.getDocument(id: authData.uid)
+        await MainActor.run {
+            self.member = member
+        }
+    }
     
     func getAllQuestions() async throws {
         let questions = try await questionsManager.getDocuments(queries: [.orderBy(field: "questionNo", descending: false)])
@@ -34,12 +46,14 @@ final class QuestionsObservable {
     
     @MainActor
     func nextQuestion() {
+        guard let member else { return }
         print("Next question")
         if currentQuestionIndex < allQuestions.count {
             print("Next question: \(currentQuestionIndex)")
             let question = allQuestions[currentQuestionIndex]
             answers.append(Answer(
                 questionId: question.id,
+                memberId: member.id,
                 answerText: answerText,
                 answerInt: answerInt,
                 answerFloat: answerFloat,

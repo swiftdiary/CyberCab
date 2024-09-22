@@ -11,7 +11,7 @@ import Foundation
 
 // MARK: - Cab Model
 struct Cab: Firestorable {
-    static var collectionReferenceName: String = "cabs"
+    static var collectionReferenceName: String = "cabins"
     var createdAt: Date
     
     let id: String
@@ -33,9 +33,9 @@ struct Cab: Firestorable {
 struct CabContent: Codable, Hashable {
     let type: CabContentType
     let image: String?
-    let paragraph: String?
-    let heading: String?
-    let arItem: String?
+    let paragraph: AppLocalizable?
+    let heading: AppLocalizable?
+    let arItem: AppLocalizable?
     
     enum CabContentType: String, Codable {
         case paragraph
