@@ -10,7 +10,7 @@ import Foundation
 
 @Observable
 final class HistoryObservable {
-    var sessions: [Session] = [Session(createdAt: Date.now, id: "12", availableHourId: "123", memberId: "1234", scheduleDate: .now, status: .scheduled)]
+    var sessions: [Session] = []
     
     let sessionsManager = FirestoreManager<Session>()
     let availableHoursManager = FirestoreManager<AvailableHour>()

@@ -18,6 +18,15 @@ struct Session: Firestorable {
     var scheduleDate: Date
     var status: SessionStatus
     
+    init(availableHourId: String, memberId: String, scheduleDate: Date, status: SessionStatus) {
+        self.createdAt = Date()
+        self.id = UUID().uuidString
+        self.availableHourId = availableHourId
+        self.memberId = memberId
+        self.scheduleDate = scheduleDate
+        self.status = status
+    }
+    
     // Enum to represent different session statuses
     enum SessionStatus: String, Codable {
         case scheduled
