@@ -6,11 +6,17 @@
 //
 
 import Foundation
+import CoreImage.CIFilterBuiltins
+import SwiftUI
 
 
 @Observable
 final class HistoryObservable {
     var sessions: [Session] = []
+    var qrImage: UIImage? = nil
+    
+    let context = CIContext()
+    let filter = CIFilter.qrCodeGenerator()
     
     let sessionsManager = FirestoreManager<Session>()
     let availableHoursManager = FirestoreManager<AvailableHour>()
@@ -24,4 +30,18 @@ final class HistoryObservable {
             self.sessions = sessions
         }
     }
+    
+    func generateQRCode(from string: String) {
+        let data = Data(string.utf8)
+        filter.setValue(data, forKey: "inputMessage")
+        
+        let transform = CGAffineTransform(scaleX: 10, y: 10)
+        
+        if let outputImage = filter.outputImage?.transformed(by: transform) {
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                qrImage = UIImage(cgImage: cgimg)
+            }
+        }
+    }
+    
 }
