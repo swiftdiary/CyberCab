@@ -43,6 +43,7 @@ struct QuestionsView: View {
         })
         .task {
             do {
+                try await questionsObservable.getUser()
                 try await questionsObservable.getAllQuestions()
             } catch {
                 print(error)

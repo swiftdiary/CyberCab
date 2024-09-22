@@ -12,6 +12,7 @@
 		CA1B1CF72C9EDC7F001761AF /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CA1B1CF62C9EDC7F001761AF /* FirebaseAnalytics */; };
 		CA1B1D472C9EE8E8001761AF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CA1B1D462C9EE8E8001761AF /* GoogleSignIn */; };
 		CA1B1D492C9EE8E8001761AF /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CA1B1D482C9EE8E8001761AF /* GoogleSignInSwift */; };
+		CA7D009C2C9F9ECA00176F17 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CA7D009B2C9F9ECA00176F17 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 				CA1B1D472C9EE8E8001761AF /* GoogleSignIn in Frameworks */,
 				CA1B1CF42C9ED8AE001761AF /* FirebaseFirestore in Frameworks */,
 				CA1B1CF72C9EDC7F001761AF /* FirebaseAnalytics in Frameworks */,
+				CA7D009C2C9F9ECA00176F17 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +106,7 @@
 				CA1B1CF62C9EDC7F001761AF /* FirebaseAnalytics */,
 				CA1B1D462C9EE8E8001761AF /* GoogleSignIn */,
 				CA1B1D482C9EE8E8001761AF /* GoogleSignInSwift */,
+				CA7D009B2C9F9ECA00176F17 /* FirebaseStorage */,
 			);
 			productName = CyberCab;
 			productReference = CA1B1CDF2C9ED7F9001761AF /* CyberCab.app */;
@@ -424,6 +427,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CA1B1D452C9EE8E8001761AF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		CA7D009B2C9F9ECA00176F17 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA1B1CF02C9ED8AE001761AF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

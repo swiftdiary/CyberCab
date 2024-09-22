@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// This should show all possilbe
+// This is booking 
 struct SessionCreateView: View {
     var body: some View {
         Text("Hello, Create!")

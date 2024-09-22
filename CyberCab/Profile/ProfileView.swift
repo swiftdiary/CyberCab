@@ -74,7 +74,7 @@ extension ProfileView {
     func settingsOptions(member: Member) -> some View {
         VStack {
             List {
-                settingsOptionRow(title: "History", systemImage: "clock.fill", color: .blue, nav: .history(memvber: member))
+                settingsOptionRow(title: "History", systemImage: "clock.fill", color: .blue, nav: .history(member))
                 
                 contactLinkRow()
                 
