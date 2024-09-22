@@ -41,6 +41,21 @@ struct ProfileView: View {
         }
     }
     
+    // MARK: - Log Out Button
+    @ViewBuilder
+    func logOutButton() -> some View {
+        Button {
+            do {
+                try authService.logOut()
+                isAuthenticated = false
+            } catch {
+                print("Logout failed: \(error)")
+            }
+        } label: {
+            settingsOptionRow(title: "Log Out", systemImage: "rectangle.portrait.and.arrow.right", color: .red, nav: nil)
+        }
+    }
+    
     // MARK: - Load Profile Data
     private func loadProfileData() async {
         do {
@@ -59,7 +74,7 @@ extension ProfileView {
     func settingsOptions(member: Member) -> some View {
         VStack {
             List {
-                settingsOptionRow(title: "History", systemImage: "clock.fill", color: .blue, nav: .history(memvber: member))
+                settingsOptionRow(title: "History", systemImage: "clock.fill", color: .blue, nav: .history(member))
                 
                 contactLinkRow()
                 
@@ -72,21 +87,6 @@ extension ProfileView {
             .scrollContentBackground(.hidden)
             .font(.system(size: 22, weight: .medium))
             .foregroundStyle(Color.primary)
-        }
-    }
-    
-    // MARK: - Log Out Button
-    @ViewBuilder
-    func logOutButton() -> some View {
-        Button {
-            do {
-                try authService.logOut()
-                isAuthenticated = false
-            } catch {
-                print("Logout failed: \(error)")
-            }
-        } label: {
-            settingsOptionRow(title: "Log Out", systemImage: "rectangle.portrait.and.arrow.right", color: .red, nav: nil)
         }
     }
     

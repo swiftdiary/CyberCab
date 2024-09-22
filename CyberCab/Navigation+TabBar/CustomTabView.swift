@@ -59,7 +59,7 @@ struct CustomTabView: View {
                         .fill(.background)
                         .shadow(radius: 10)
                 )
-                .padding()
+                .padding(.horizontal)
             }
         }
     }

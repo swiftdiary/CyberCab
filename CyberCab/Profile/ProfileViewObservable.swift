@@ -14,9 +14,9 @@ final class ProfileViewObservable {
     var member: Member?
     var sessions: [Session] = []
     
-    let memberManager = FirestoreManager<Member>()
-    let sessionsManager = FirestoreManager<Session>()
-    let authManager = AuthenticationService()
+    @ObservationIgnored let memberManager = FirestoreManager<Member>()
+    @ObservationIgnored let sessionsManager = FirestoreManager<Session>()
+    @ObservationIgnored let authManager = AuthenticationService()
     
     func getMember() async throws {
         let member = try await memberManager.getDocument(id: authManager.getAuthenticatedUser().uid)
