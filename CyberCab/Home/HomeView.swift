@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @AppStorage("isAuthenticated") private var isAuthenticated: Bool = false
     @State private var homeObservable = HomeObservable()
+    @Environment(CustomNavigation.self) private var navigation
     
     var body: some View {
         @Bindable var homeObservable = homeObservable
@@ -22,6 +23,7 @@ struct HomeView: View {
                     ArticlesSection()
                     RecommendedSection()
                     OtherCabs()
+                    HStack{}.frame(height: 40)
                 }
             }
         }
@@ -80,6 +82,9 @@ struct HomeView: View {
                 HStack {
                     ForEach(homeObservable.articles) { article in
                         ArticleItem(article: article)
+                            .onTapGesture {
+                                navigation.path.append(.article(article))
+                            }
                     }
                 }
             }
@@ -108,6 +113,7 @@ struct HomeView: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.white)
         }
+        .contentShape(Rectangle())
         .padding(.horizontal, 10)
     }
     
@@ -120,6 +126,9 @@ struct HomeView: View {
             VStack {
                 ForEach(homeObservable.cabs.prefix(2)) { cab in
                     CabRowItem(cab: cab)
+                        .onTapGesture {
+                            navigation.path.append(.cabin(cab))
+                        }
                 }
             }
         }
@@ -158,6 +167,9 @@ struct HomeView: View {
             VStack {
                 ForEach(homeObservable.cabs) { cab in
                     CabRowItem(cab: cab)
+                        .onTapGesture {
+                            navigation.path.append(.cabin(cab))
+                        }
                 }
             }
         }
