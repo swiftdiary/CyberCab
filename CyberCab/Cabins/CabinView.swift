@@ -32,8 +32,9 @@ struct CabinView: View {
                     }
                 }
                 CC_PrimaryButton("BOOK A TOUR") {
-                    
+                    navigation.path.append(.sessionCreate(cab))
                 }
+                .padding()
             }
         }
         .task {
